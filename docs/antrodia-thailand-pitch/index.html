@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouCan Biotech — Antrodia Cinnamomea Ingredients</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;600&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange:   #d96030;
+    --green:    #1d4c40;
+    --cream:    #efead3;
+    --black:    #231815;
+    --warm-mid: #5a4535;
+    --warm-lt:  #9c8a78;
+    --sand:     #d4c8b0;
+    --rule:     rgba(217,96,48,0.18);
+    --green-lt: rgba(29,76,64,0.07);
+    --orange-lt:rgba(217,96,48,0.06);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Work Sans','Noto Sans TC',sans-serif; background:var(--cream); color:var(--black); overflow:hidden; height:100vh; width:100vw; }
+  .deck { width:100%; height:100%; position:relative; }
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:52px 80px; opacity:0; transform:translateY(16px); transition:opacity .55s ease,transform .55s ease; pointer-events:none; background:var(--cream); }
+  .slide.active { opacity:1; transform:translateY(0); pointer-events:all; }
+  .nav { position:fixed; bottom:28px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:16px; z-index:100; }
+  .dot { width:5px; height:5px; border-radius:50%; background:var(--sand); cursor:pointer; transition:all .3s; }
+  .dot.on { background:var(--orange); width:18px; border-radius:2.5px; }
+  .nbtn { background:none; border:none; color:var(--warm-lt); font:500 11px/1 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:color .3s; }
+  .nbtn:hover { color:var(--orange); }
+  .snum { position:fixed; top:28px; right:42px; font:300 10px/1 'Work Sans',sans-serif; letter-spacing:3px; color:var(--sand); }
+  /* Typography */
+  .eye { font:600 9px/1 'Unbounded',sans-serif; letter-spacing:5px; text-transform:uppercase; color:var(--orange); margin-bottom:14px; }
+  h1 { font:300 clamp(30px,3.8vw,54px)/1.1 'Unbounded',sans-serif; color:var(--cream); text-align:center; }
+  h2 { font:300 clamp(22px,2.6vw,38px)/1.2 'Unbounded',sans-serif; color:var(--black); }
+  h3 { font:400 clamp(13px,1.2vw,16px)/1.4 'Unbounded',sans-serif; color:var(--black); letter-spacing:1px; }
+  .bar { width:36px; height:2px; background:var(--orange); margin:18px auto; }
+  .bar-l { width:36px; height:2px; background:var(--orange); margin:18px 0; }
+  p { font:300 clamp(14px,1.6vw,18px)/1.85 'Work Sans','Noto Sans TC',sans-serif; color:var(--warm-mid); }
+  li { font:300 clamp(14px,1.6vw,18px)/1.85 'Work Sans','Noto Sans TC',sans-serif; color:var(--warm-mid); }
+  strong { color:var(--black); font-weight:500; }
+  .w { width:100%; max-width:1080px; }
+  /* Layouts */
+  .col2 { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:start; }
+  .col3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .col4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  /* Components */
+  .card { padding:26px 24px; border:1px solid var(--rule); }
+  .card-dk { padding:26px 24px; background:var(--green); }
+  .card-dk p,.card-dk li { color:rgba(239,234,211,0.72); }
+  .card-dk strong { color:var(--cream); }
+  .card-or { padding:26px 24px; background:var(--orange); }
+  .card-or p,.card-or li { color:rgba(255,255,255,0.88); }
+  .card-or strong { color:#fff; }
+  .tl { list-style:none; }
+  .tl li { padding:8px 0; border-bottom:1px solid var(--rule); display:flex; gap:10px; align-items:baseline; }
+  .tl li::before { content:'—'; color:var(--orange); flex-shrink:0; font-size:11px; }
+  .big { font:200 clamp(38px,4.8vw,64px)/1 'Unbounded',sans-serif; color:var(--black); margin-bottom:4px; }
+  .big-or { font:200 clamp(38px,4.8vw,64px)/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:4px; }
+  .sub { font:500 8px/1 'Work Sans',sans-serif; letter-spacing:3.5px; text-transform:uppercase; color:var(--warm-lt); }
+  .vbox { border-left:2px solid var(--orange); padding:16px 20px; background:var(--green-lt); }
+  .vbox p { color:var(--black); line-height:1.75; }
+  .pill { display:inline-block; padding:3px 10px; border:1px solid var(--orange); font:500 8px/1.7 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:12px; }
+  .pill-lt { display:inline-block; padding:3px 10px; border:1px solid rgba(239,234,211,.35); font:500 8px/1.7 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:rgba(239,234,211,.7); margin-bottom:12px; }
+  .badge-row { display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; justify-content:center; }
+  .badge { border:1px solid rgba(239,234,211,.35); padding:8px 15px; font:500 8px/1.8 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:rgba(239,234,211,.8); }
+  .cert-row { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+  .cert { border:1px solid var(--rule); padding:7px 13px; font:500 8px/1.6 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:var(--orange); }
+  /* Format cards */
+  .fmt { border-top:2px solid var(--rule); padding:22px 0 0; }
+  .fmt.active-fmt { border-top-color:var(--orange); }
+  .fmt-tag { font:600 8px/1 'Unbounded',sans-serif; letter-spacing:3px; text-transform:uppercase; color:var(--warm-lt); margin-bottom:10px; display:block; }
+  .fmt.active-fmt .fmt-tag { color:var(--orange); }
+  .fmt h4 { font:400 clamp(13px,1.15vw,15px)/1.3 'Unbounded',sans-serif; color:var(--black); margin-bottom:10px; }
+  .fmt p { font-size:clamp(13px,1.2vw,15px); line-height:1.75; }
+  .fmt .use { font:500 9px/1 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:var(--warm-lt); margin-top:14px; display:block; }
+  /* Table */
+  table { width:100%; border-collapse:collapse; margin-top:20px; }
+  th { font:500 9px/1 'Work Sans',sans-serif; letter-spacing:3px; text-transform:uppercase; color:var(--warm-lt); padding:9px 12px; border-bottom:1px solid var(--rule); text-align:left; }
+  td { font:300 clamp(13px,1.3vw,15px)/1.6 'Work Sans',sans-serif; color:var(--warm-mid); padding:9px 12px; border-bottom:1px solid rgba(217,96,48,0.08); vertical-align:top; }
+  /* Certification logos */
+  .cert-logos { display:flex; gap:20px; flex-wrap:wrap; align-items:center; margin-top:20px; padding-top:16px; border-top:1px solid var(--rule); }
+  .cert-logo { height:36px; width:auto; object-fit:contain; filter:grayscale(30%) opacity(0.85); transition:filter .3s; }
+  .cert-logo:hover { filter:grayscale(0%) opacity(1); }
+  td strong { color:var(--black); }
+  tr:last-child td { border-bottom:none; }
+  .hi-row td { background:var(--green-lt); }
+  /* Quote */
+  .q { font:300 italic clamp(16px,1.9vw,24px)/1.65 'Work Sans',sans-serif; color:var(--black); text-align:center; max-width:760px; }
+  .q-attr { font:500 9px/1 'Work Sans',sans-serif; letter-spacing:3px; text-transform:uppercase; color:var(--warm-lt); margin-top:16px; text-align:center; }
+  /* Divider line */
+  .hr { width:100%; height:1px; background:var(--rule); margin:20px 0; }
+  /* Print */
+  @media print {
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body { overflow:visible; height:auto; }
+    .deck { height:auto; position:static; }
+    .slide { position:relative !important; opacity:1 !important; transform:none !important; pointer-events:auto !important; display:flex !important; height:100vh; overflow:hidden; page-break-after:always; break-after:page; }
+    .nav,.snum { display:none !important; }
+  }
+  /* Responsive */
+  @media (max-width:1024px) {
+    .col3 { grid-template-columns:1fr 1fr; }
+    .col4 { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:640px) {
+    .slide { padding:48px 18px 80px; overflow-y:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; }
+    h1 { font-size:clamp(20px,6.5vw,34px); }
+    h2 { font-size:clamp(16px,5vw,26px); }
+    .col2 { grid-template-columns:1fr; gap:18px; }
+    .col3 { grid-template-columns:1fr; gap:10px; }
+    .col4 { grid-template-columns:1fr 1fr; gap:10px; }
+    .big,.big-or { font-size:clamp(28px,8.5vw,46px); }
+    .snum { top:14px; right:16px; }
+    .nav { bottom:14px; gap:10px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- S1: COVER -->
+<div class="slide active" id="s1" style="background:var(--green);">
+  <div class="w" style="text-align:center;">
+    <div class="eye">YouCan Biotech · Wufeng, Taiwan · Est. 2004</div>
+    <h1>Antrodia Cinnamomea<br>Ingredients for<br>Premium Formulations</h1>
+    <div class="bar"></div>
+    <p style="color:rgba(239,234,211,.6); max-width:580px; margin:0 auto; font-size:clamp(13px,1.3vw,15px);">Taiwan's largest log-cultivated Antrodia cinnamomea supplier. CNS 16152 Grade 1 certified, vintage-graded, with complete regulatory documentation — ready for your capsule, tablet, and sachet lines.</p>
+    <div class="badge-row">
+      <div class="badge">Triterpenoids ≥ 14.2%</div>
+      <div class="badge">CNS16152 Grade 1</div>
+      <div class="badge">1,000+ Tests / Lot</div>
+      <div class="badge">20 Years Cultivation</div>
+    </div>
+  </div>
+</div>
+
+<!-- S2: THEIR OPPORTUNITY -->
+<div class="slide" id="s2">
+  <div class="w">
+    <div class="eye">Your Market Opportunity</div>
+    <h2>Your Customers Are Already<br>Looking for This.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:28px;">
+      <div>
+        <p>Southeast Asian health food consumers are shifting from generic vitamins to <strong>functional ingredients with a traceable origin story</strong>. They want science, not marketing claims. They want to know where it comes from and what's in it.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px;">
+          <div style="padding:16px 18px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 28px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">2×</div>
+            <div style="font:600 11px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:6px;">Market Growth</div>
+            <p style="font-size:12px; line-height:1.55; color:var(--warm-mid);">Functional mushroom supplement market growing at double digits — Southeast Asia is an emerging demand center</p>
+          </div>
+          <div style="padding:16px 18px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 28px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">TW</div>
+            <div style="font:600 11px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:6px;">Endemic Origin</div>
+            <p style="font-size:12px; line-height:1.55; color:var(--warm-mid);">Antrodia cinnamomea grows only in Taiwan. Your competitors cannot source it authentically — anywhere</p>
+          </div>
+          <div style="padding:16px 18px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 28px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">37+</div>
+            <div style="font:600 11px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:6px;">Academic Papers</div>
+            <p style="font-size:12px; line-height:1.55; color:var(--warm-mid);">Peer-reviewed science your R&amp;D and sales teams can actually cite — not generic wellness claims</p>
+          </div>
+          <div style="padding:16px 18px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 28px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">★</div>
+            <div style="font:600 11px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:6px;">Award-Winning</div>
+            <p style="font-size:12px; line-height:1.55; color:var(--warm-mid);">Paris Olympics Taiwan Pavilion 2024 + National Brand Yushan Award — your products already have a story to tell</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-or" style="margin-bottom:18px;">
+          <strong style="display:block; margin-bottom:10px; font-size:13px;">The Gap You Can Fill</strong>
+          <p>Thai health food consumers are increasingly demanding premium, origin-verified, functional ingredients. The brands that move first with authenticated Antrodia will own the category positioning in your market — before competitors catch on.</p>
+        </div>
+        <div class="card-dk">
+          <strong style="display:block; margin-bottom:10px; font-size:13px;">Why Now</strong>
+          <p>Antrodia is well-known in Taiwan's health market. In Southeast Asia, it is still an <strong>early-adopter ingredient</strong> — the window to establish premium positioning is open. It won't stay open indefinitely.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S3: BRAND STORY — 20 years -->
+<div class="slide" id="s3">
+  <div class="w">
+    <div class="eye">Our Story</div>
+    <h2>Twenty Years.<br>One Ingredient. No Shortcuts.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:22px; gap:44px; align-items:start;">
+      <div>
+        <p style="font-size:clamp(13px,1.35vw,15px);">In 2004, YouCan Biotech started with one conviction: that Antrodia cinnamomea — Taiwan's rarest endemic mushroom — could be cultivated at commercial scale without compromising quality. Twenty years later, we are still growing the same single ingredient. Nothing else.</p>
+        <div style="margin-top:18px; border-left:3px solid var(--orange); padding:14px 18px; background:var(--orange-lt);">
+          <p style="font-size:13px; line-height:1.7; font-style:italic; color:var(--warm-mid);">"Most suppliers diversify. We didn't. Twenty years of focus on one species is what produces 14.2% triterpenoids — not a shortcut, not a formula tweak."</p>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px;">
+          <div style="text-align:center; padding:16px 12px; border:1px solid var(--rule);">
+            <div style="font:200 30px/1 'Unbounded',sans-serif; color:var(--orange);">2004</div>
+            <p style="font-size:11px; margin-top:6px; color:var(--warm-lt); line-height:1.5;">Founded in Wufeng, Taichung — Taiwan's heartland for Antrodia cultivation. First commercial log-cultivation facility.</p>
+          </div>
+          <div style="text-align:center; padding:16px 12px; background:var(--green);">
+            <div style="font:200 30px/1 'Unbounded',sans-serif; color:var(--orange);">20th</div>
+            <p style="font-size:11px; margin-top:6px; color:rgba(239,234,211,.7); line-height:1.5;">Year — the only supplier with full vintage grading and CNS 16152 Grade 1 certification at this scale.</p>
+          </div>
+          <div style="text-align:center; padding:16px 12px; border:1px solid var(--rule);">
+            <div style="font:200 30px/1 'Unbounded',sans-serif; color:var(--orange);">37+</div>
+            <p style="font-size:11px; margin-top:6px; color:var(--warm-lt); line-height:1.5;">Peer-reviewed papers. The science library your R&D and regulatory teams need to make health claims.</p>
+          </div>
+          <div style="text-align:center; padding:16px 12px; border:1px solid var(--rule);">
+            <div style="font:200 30px/1 'Unbounded',sans-serif; color:var(--orange);">1,000+</div>
+            <p style="font-size:11px; margin-top:6px; color:var(--warm-lt); line-height:1.5;">Safety tests per production lot — zero heavy metals, zero pesticides, zero pharmaceutical adulterants.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-or" style="padding:22px 22px; margin-bottom:16px;">
+          <strong style="display:block; font-size:13px; margin-bottom:10px;">Why Single-Ingredient Focus Matters to You</strong>
+          <p style="font-size:13px; line-height:1.7;">A supplier who grows 12 different mushrooms cannot optimize cultivation for any one of them. Our entire institutional knowledge — every camphor log, every harvest, every test over 20 years — is concentrated on one species. That is why our numbers are consistently higher than industry averages.</p>
+        </div>
+        <div class="card-dk" style="padding:22px 22px;">
+          <strong style="display:block; font-size:13px; color:var(--cream); margin-bottom:14px;">Recognition Over 20 Years</strong>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:12px; padding-bottom:10px; border-bottom:1px solid rgba(239,234,211,.1);">
+              <img src="./youcan-yushan-logo.png" style="height:28px; width:auto; object-fit:contain; flex-shrink:0;">
+              <p style="font-size:12px; color:rgba(239,234,211,.82); margin:0;">National Brand Yushan Award 2023 — Best Product Category</p>
+            </div>
+            <div style="padding-bottom:10px; border-bottom:1px solid rgba(239,234,211,.1);">
+              <p style="font-size:12px; color:rgba(239,234,211,.82); margin:0;">2024 Paris Olympics · Taiwan Pavilion Official Gift Selection</p>
+            </div>
+            <div style="padding-bottom:10px; border-bottom:1px solid rgba(239,234,211,.1);">
+              <p style="font-size:12px; color:rgba(239,234,211,.82); margin:0;">2025 Brain Health Innovation Award · Taiwan Nutritional Psychiatry Society</p>
+            </div>
+            <div>
+              <p style="font-size:12px; color:rgba(239,234,211,.82); margin:0;">H-MART Bay Area · Thryve Superfoods — on shelf in the US market</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4: WOOD-GROWN FRUITING BODY -->
+<div class="slide" id="s4">
+  <div class="w">
+    <div class="eye">Ingredient Standard</div>
+    <h2>Wood-Grown Antrodia Fruiting Body.<br>Not All Antrodia Is the Same.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:22px; gap:44px;">
+      <div>
+        <p style="font-size:clamp(13px,1.35vw,15px);">The ingredient category is called "Antrodia cinnamomea" — but products sold under this name vary enormously depending on whether they are <strong>fruiting body or mycelium</strong>, and whether they are <strong>wood-grown or grain-grown</strong>. The raw material you specify determines what ends up in your capsule.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px;">
+          <div style="padding:14px 16px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 26px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">8</div>
+            <div style="font:600 10px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">Signature Antcins</div>
+            <p style="font-size:11px; line-height:1.55; color:var(--warm-mid);">Present only in fruiting body, not mycelium. These 8 compounds are the biomarkers CNS 16152 was written to measure — without them, the product cannot qualify.</p>
+          </div>
+          <div style="padding:14px 16px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 26px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">14.2%</div>
+            <div style="font:600 10px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">Triterpenoids</div>
+            <p style="font-size:11px; line-height:1.55; color:var(--warm-mid);">Wood-grown fruiting body triggers full triterpenoid metabolism. Grain-grown products typically yield 2–5%. The camphor wood substrate is what makes the chemistry possible.</p>
+          </div>
+          <div style="padding:14px 16px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 26px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">CNS</div>
+            <div style="font:600 10px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">16152 Grade 1</div>
+            <p style="font-size:11px; line-height:1.55; color:var(--warm-mid);">Taiwan's national standard applies to fruiting body only. Mycelium and grain-grown products do not qualify — they cannot carry this certification on your packaging.</p>
+          </div>
+          <div style="padding:14px 16px; border-left:2px solid var(--orange); background:var(--orange-lt);">
+            <div style="font:200 26px/1 'Unbounded',sans-serif; color:var(--orange); margin-bottom:6px;">99%</div>
+            <div style="font:600 10px/1.3 'Work Sans',sans-serif; color:var(--black); margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">DNA Match to Wild</div>
+            <p style="font-size:11px; line-height:1.55; color:var(--warm-mid);">Wood-grown replication of wild conditions. MOA-verified — the same compound identity as wild-harvested Antrodia, at commercial scale and consistent quality.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eye" style="margin-bottom:12px;">What Your Supplier Doesn't Always Tell You</div>
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th style="color:var(--orange);">Wood-Grown Fruiting Body</th><th>Mycelium</th><th>Grain-Grown</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hi-row"><td><strong>Triterpenoid content</strong></td><td style="color:var(--orange); font-weight:500;">14.2%</td><td style="color:var(--warm-lt);">Low / absent</td><td style="color:var(--warm-lt);">2–5%</td></tr>
+            <tr><td>8 marker antcins</td><td style="color:var(--orange); font-weight:500;">All 8 present</td><td style="color:var(--warm-lt);">Absent</td><td style="color:var(--warm-lt);">Incomplete</td></tr>
+            <tr class="hi-row"><td><strong>CNS 16152 eligible</strong></td><td style="color:var(--orange); font-weight:500;">Yes — Grade 1</td><td style="color:var(--warm-lt);">No</td><td style="color:var(--warm-lt);">No</td></tr>
+            <tr><td>Polysaccharides</td><td style="color:var(--orange); font-weight:500;">11.16 g/100g</td><td style="color:var(--warm-lt);">Variable</td><td style="color:var(--warm-lt);">Largely starch</td></tr>
+            <tr class="hi-row"><td><strong>DNA species verified</strong></td><td style="color:var(--orange); font-weight:500;">MOA 99%</td><td style="color:var(--warm-lt);">Rarely tested</td><td style="color:var(--warm-lt);">Rarely tested</td></tr>
+            <tr><td>Vintage grade mark</td><td style="color:var(--orange); font-weight:500;">Licensable</td><td style="color:var(--warm-lt);">Not applicable</td><td style="color:var(--warm-lt);">Not applicable</td></tr>
+          </tbody>
+        </table>
+        <div class="vbox" style="margin-top:14px;">
+          <p style="font-size:12px; line-height:1.65;">Many "Antrodia cinnamomea" products on the market are mycelium-based or grain-grown. They can legally carry the species name — but they lack the marker antcins that define the ingredient's therapeutic value and CNS 16152 eligibility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5: INGREDIENT FORMATS -->
+<div class="slide" id="s5">
+  <div class="w">
+    <div class="eye">Ingredient Formats</div>
+    <h2>Choose the Format<br>Your Formulation Needs</h2>
+    <div class="bar-l"></div>
+    <div class="col4" style="margin-top:32px;">
+      <div class="fmt active-fmt">
+        <span class="fmt-tag">Format 01</span>
+        <h4>Standardized<br>Extract Powder</h4>
+        <p>Hot water extraction, spray-dried. Standardized to ≥ 14.2% total triterpenoids. Consistent batch-to-batch. Free-flowing powder for capsule filling or tablet compression.</p>
+        <span class="use">Capsules · Tablets · Sachets</span>
+      </div>
+      <div class="fmt active-fmt">
+        <span class="fmt-tag">Format 02</span>
+        <h4>Supercritical<br>CO₂ Extract</h4>
+        <p>High-concentration lipophilic extraction. Maximum triterpenoid density. Optimal for premium softgels and sublingual applications where potency per serving is the priority.</p>
+        <span class="use">Softgels · Sublingual · Premium Capsules</span>
+      </div>
+      <div class="fmt active-fmt">
+        <span class="fmt-tag">Format 03</span>
+        <h4>Dual Extract<br>Powder</h4>
+        <p>Water extraction (polysaccharides) + CO₂ extraction (triterpenoids) combined. Full-spectrum bioactive profile in a single ingredient. Industry gold standard for premium mushroom products.</p>
+        <span class="use">Premium Capsules · Functional Beverages</span>
+      </div>
+      <div class="fmt">
+        <span class="fmt-tag">Format 04</span>
+        <h4>Whole Fruiting<br>Body Powder</h4>
+        <p>Full-spectrum, minimally processed. Ideal for "whole food" label positioning. Lower concentration, larger serving size. Good for functional food applications and blending.</p>
+        <span class="use">Tablets · Functional Food · Blends</span>
+      </div>
+    </div>
+    <div style="margin-top:22px; border-top:2px solid var(--orange); padding-top:20px;">
+      <div class="eye" style="margin-bottom:6px; color:var(--orange);">Two Systems That Justify a Higher Price — and Help You Sell More</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:14px;">
+        <div style="display:flex; gap:18px; align-items:center; background:var(--green); border-radius:6px; padding:16px 20px;">
+          <img src="./youcan-cns-grade1-badge.jpg" style="height:110px; width:110px; object-fit:contain; border-radius:50%; flex-shrink:0;">
+          <div>
+            <p style="font:600 13px/1.2 'Work Sans',sans-serif; color:var(--cream); margin:0 0 6px;">CNS 16152 · Grade 1</p>
+            <p style="font-size:12px; color:rgba(239,234,211,.75); margin:0 0 8px; line-height:1.55;">Taiwan's national standard for Antrodia fruiting body — Grade 1 (Premium). Your product packaging can carry this mark. Consumers see government verification, not a supplier's self-claim.</p>
+            <p style="font-size:11px; color:var(--orange); margin:0; font-weight:600;">→ Supports a premium price point on shelf</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:18px; align-items:center; background:#f5f0e8; border-radius:6px; padding:16px 20px; border:1px solid var(--rule);">
+          <img src="./youcan-vintage-badge.jpg" style="height:110px; width:110px; object-fit:contain; border-radius:50%; background:#ddd8cc; flex-shrink:0;">
+          <div>
+            <p style="font:600 13px/1.2 'Work Sans',sans-serif; color:var(--black); margin:0 0 6px;">Vintage Grade Mark<br>4-Year · 8-Year · 10-Year</p>
+            <p style="font-size:12px; color:var(--warm-lt); margin:0 0 8px; line-height:1.55;">Three age tiers, each with a licensable mark you can print on your packaging. Like wine vintages — same origin, different maturity, different pricing. Build a product line from a single ingredient.</p>
+            <p style="font-size:11px; color:var(--orange); margin:0; font-weight:600;">→ Create tiered SKUs and price segmentation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6: KEY SPECS -->
+<div class="slide" id="s6">
+  <div class="w">
+    <div class="eye">Technical Specifications</div>
+    <h2>The Numbers Your<br>R&D Team Will Ask For</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:28px;">
+      <div>
+        <div class="col2" style="gap:24px;">
+          <div>
+            <div class="big-or">14.2%</div>
+            <div class="sub">Triterpenoids — 8 Unique Antcins</div>
+            <p style="margin-top:8px; font-size:12px;">18% above CNS16152 Grade 1 threshold (12%). Contains 8 Antrodia-exclusive small-molecule antcins (Antcin A/B/C/H/K, DSA, DEA, 15α-acetyl DSA) — the marker compounds no other mushroom species produces.</p>
+          </div>
+          <div>
+            <div class="big">99%</div>
+            <div class="sub">DNA Match to Wild</div>
+            <p style="margin-top:8px; font-size:12px;">Verified by Taiwan Ministry of Agriculture DNA analysis. Authentic species identity — not a substitute strain.</p>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <div class="col2" style="gap:24px;">
+          <div>
+            <div class="big">11.16g</div>
+            <div class="sub">Polysaccharides / 100g</div>
+            <p style="margin-top:8px; font-size:12px;">Consistent across production batches. Beta-glucans and immunomodulatory polysaccharides fully characterized.</p>
+          </div>
+          <div>
+            <div class="big-or">+3.84%</div>
+            <div class="sub">Immune Activity Uplift</div>
+            <p style="margin-top:8px; font-size:12px;">Taiwan Agriculture Research (TACTRI) study: fruiting body + mycelium combination shows measurable immunomodulatory uplift.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Specification</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hi-row"><td><strong>Triterpenoids (8 unique antcins)</strong></td><td>≥ 14.2% (CNS16152 Grade 1)</td></tr>
+            <tr><td>Polysaccharides</td><td>≥ 11.16 g / 100g</td></tr>
+            <tr class="hi-row"><td><strong>Pesticide residues</strong></td><td>Zero detected (380 compounds)</td></tr>
+            <tr><td>Heavy metals</td><td>Zero detected (4 metals)</td></tr>
+            <tr class="hi-row"><td><strong>Pharmaceutical adulterants</strong></td><td>Zero detected (315 compounds)</td></tr>
+            <tr><td>Moisture content</td><td>[Spec available on request]</td></tr>
+            <tr class="hi-row"><td><strong>Shelf life</strong></td><td>3 years (sealed, stored at 25°C)</td></tr>
+          </tbody>
+        </table>
+        <div class="cert-row" style="margin-top:16px;">
+          <div class="cert">CNS16152 Grade 1</div>
+          <div class="cert">ISO 22000</div>
+          <div class="cert">HACCP</div>
+          <div class="cert">MOA DNA Verified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S7: SAFETY — what their regulatory team needs -->
+<div class="slide" id="s7">
+  <div class="w">
+    <div class="eye">Regulatory Confidence</div>
+    <h2>Everything Your Regulatory<br>Team Needs to File.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:28px;">
+      <div>
+        <div class="vbox" style="margin-bottom:20px;">
+          <p><strong>We understand what your local regulatory team will ask for.</strong> Every shipment comes with complete documentation so your market filing process is straightforward — not a battle with your supplier.</p>
+        </div>
+        <ul class="tl">
+          <li><strong>Certificate of Analysis (COA)</strong> — per lot, in English, with all tested parameters</li>
+          <li><strong>Heavy metals panel</strong> — 4 metals, zero detected, third-party verified</li>
+          <li><strong>Pesticide screening</strong> — 380 compounds, zero detected</li>
+          <li><strong>Pharmaceutical adulterant screen</strong> — 315 compounds</li>
+          <li><strong>Microbiological testing</strong> — standard food safety panel</li>
+          <li><strong>90-day toxicology report</strong> — the only Antrodia supplier to test both fruiting body AND mycelium; full documentation available</li>
+          <li><strong>Academic literature pack</strong> — curated selection of 37+ papers relevant to your health claims</li>
+          <li><strong>Species verification</strong> — MOA DNA certificate confirming 99% identity to wild Antrodia</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card-dk" style="margin-bottom:18px;">
+          <strong style="display:block; margin-bottom:10px;">Industry First</strong>
+          <p>YouCan Biotech is the only Antrodia cinnamomea supplier in Taiwan to conduct 90-day animal toxicology testing on both the fruiting body and the mycelium. Most competitors test only one. This gives your regulatory submission a level of safety documentation no other supplier can match.</p>
+        </div>
+        <div class="card">
+          <strong style="display:block; margin-bottom:10px;">Product Liability Coverage</strong>
+          <p>NT$50,000,000 product liability insurance through Cathay Insurance — protecting your supply chain. Available as documentation for your compliance team.</p>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="eye" style="margin-bottom:12px;">Independent Testing Partners</div>
+          <div class="cert-logos">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/FDA.png" alt="Taiwan FDA" title="Taiwan TFDA">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/SGSV2.png" alt="SGS" title="SGS Taiwan">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/TAFV2.png" alt="TAF" title="TAF 全國認證基金會">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/昭信V2.png" alt="昭信" title="昭信標準檢驗">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/華友V2.png" alt="華友" title="華友科技顧問">
+            <img class="cert-logo" src="https://www.twyoucan.com/images/testimonials/InterteckV3.png" alt="Intertek" title="Intertek 全國公證檢驗">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S8: EFFICACY — research, tests, results -->
+<div class="slide" id="s8">
+  <div class="w">
+    <div class="eye">Scientific Evidence</div>
+    <h2>Efficacy & Safety Verified<br>by Government & Academia.</h2>
+    <div class="bar-l" style="margin:10px 0;"></div>
+    <div class="col2" style="margin-top:14px; align-items:start; gap:40px;">
+      <div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="card" style="padding:16px 18px;">
+            <div class="big-or" style="font-size:clamp(28px,3.2vw,44px); margin-bottom:4px;">+3.84%</div>
+            <div class="sub" style="margin-bottom:6px;">Immune Activity Boost</div>
+            <p style="font-size:12px; line-height:1.5;">Taiwan Council of Agriculture (TACTRI) — fruiting body + mycelium combination. Government-commissioned, published.</p>
+          </div>
+          <div class="card-dk" style="padding:16px 18px;">
+            <div class="big" style="font-size:clamp(28px,3.2vw,44px); margin-bottom:4px; color:var(--cream);">90-Day</div>
+            <div class="sub" style="margin-bottom:6px; color:rgba(239,234,211,.5);">Animal Safety Testing</div>
+            <p style="font-size:12px; line-height:1.5; color:rgba(239,234,211,.72);">The only Antrodia supplier to test both fruiting body AND mycelium. Industry first. Full toxicology report in documentation pack.</p>
+          </div>
+          <div class="card" style="padding:16px 18px;">
+            <div class="big-or" style="font-size:clamp(28px,3.2vw,44px); margin-bottom:4px;">14.2%</div>
+            <div class="sub" style="margin-bottom:6px;">Triterpenoids — CNS Grade 1</div>
+            <p style="font-size:12px; line-height:1.5;">18% above the Grade 1 minimum (12%). 8 marker antcins verified by Chaoyang University. MOA DNA: 99% wild identity.</p>
+          </div>
+          <div class="card" style="padding:16px 18px;">
+            <div class="big-or" style="font-size:clamp(28px,3.2vw,44px); margin-bottom:4px;">1,000+</div>
+            <div class="sub" style="margin-bottom:6px;">Safety Tests Per Lot</div>
+            <p style="font-size:12px; line-height:1.5;">Zero heavy metals (4), zero pesticides (380 compounds), zero pharmaceutical adulterants (315 compounds). 37+ academic papers available.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eye" style="margin-bottom:8px;">Government-Issued Certification Documents</div>
+        <img src="./youcan-cert-composite.png" alt="Taiwan government certifications — Agricultural Research Institute, Drug &amp; Toxicology Lab, Ministry of Health &amp; Welfare" style="width:100%; border:1px solid var(--rule); display:block;">
+        <p style="margin-top:6px; font-size:11px; color:var(--warm-lt); line-height:1.5;">農業部林業試驗所 · 藥物毒物實驗所 · 衛生福利部</p>
+        <div style="display:flex; gap:12px; align-items:center; margin-top:10px; flex-wrap:wrap;">
+          <img src="./youcan-cns-grade1-badge.jpg" style="height:62px; width:62px; object-fit:contain; border-radius:50%; flex-shrink:0;" title="CNS 16152 Grade 1">
+          <img src="./youcan-vintage-badge.jpg" style="height:62px; width:62px; object-fit:contain; border-radius:50%; background:#e8e4dc; flex-shrink:0;" title="Vintage Grade Mark">
+          <div class="cert-row" style="margin-top:0; gap:6px; flex-wrap:wrap;">
+            <div class="cert" style="font-size:10px; padding:4px 8px;">CNS16152 Gr.1</div>
+            <div class="cert" style="font-size:10px; padding:4px 8px;">4·8·10年生</div>
+            <div class="cert" style="font-size:10px; padding:4px 8px;">ISO 22000</div>
+            <div class="cert" style="font-size:10px; padding:4px 8px;">HACCP</div>
+          </div>
+        </div>
+        <!-- Award certificate + lab analysis -->
+        <div style="margin-top:12px; border-top:1px solid var(--rule); padding-top:10px;">
+          <div class="eye" style="margin-bottom:8px;">National Award &amp; Lab Verification</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <img src="./youcan-yushan-certificate.jpg" style="width:100%; max-height:155px; border:1px solid var(--rule); border-radius:4px; display:block; object-fit:contain; background:#fafafa;">
+              <p style="font-size:10px; color:var(--warm-lt); margin:3px 0 0; line-height:1.3; text-align:center;">20th National Brand Yushan Award · Best Product 2023</p>
+            </div>
+            <div>
+              <img src="./youcan-triterpenoid-analysis.jpg" style="width:100%; max-height:155px; border:1px solid var(--rule); border-radius:4px; display:block; object-fit:contain; background:#fafafa;">
+              <p style="font-size:10px; color:var(--warm-lt); margin:3px 0 0; line-height:1.3; text-align:center;">8 Antcin markers · Total triterpenoids 142.18 mg/g · Polysaccharides 40.71</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S9: IMPORT REGULATORY PATHWAY — Taiwan → Thailand -->
+<div class="slide" id="s9">
+  <div class="w">
+    <div class="eye">Import Regulatory Pathway</div>
+    <h2>Taiwan → Thailand:<br>What Your Team Needs to Know.</h2>
+    <div class="bar-l" style="margin:10px 0;"></div>
+    <div class="col2" style="margin-top:14px; align-items:start; gap:44px;">
+      <!-- Left: pathway flow -->
+      <div>
+        <div class="vbox" style="margin-bottom:16px; background:rgba(29,76,64,0.07);">
+          <p><strong>Good news:</strong> Antrodia cinnamomea was officially added to Thailand FDA's <strong>Authorized Novel Food List in May 2024.</strong> No new safety evaluation from scratch — you use the existing authorization as the foundation for your product registration.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:12px; border-left:2px solid var(--orange); padding-left:16px; margin-left:8px;">
+            <div style="min-width:22px; height:22px; background:var(--orange); color:#fff; font:600 10px/22px 'Work Sans',sans-serif; text-align:center; border-radius:50%; margin-left:-25px; flex-shrink:0;">1</div>
+            <div>
+              <strong style="font-size:14px;">Thailand Buyer Registers Final Product</strong>
+              <p style="font-size:12px; margin-top:4px;">File Novel Food registration with Thailand FDA (Notification No. 376). Required docs: formulation, TDS, toxicology, academic literature, GMP cert. Timeline: <strong>6–18 months</strong>. Cost: ~THB 10,000–30,000 per SKU.</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:12px; border-left:2px solid var(--orange); padding-left:16px; margin-left:8px;">
+            <div style="min-width:22px; height:22px; background:var(--orange); color:#fff; font:600 10px/22px 'Work Sans',sans-serif; text-align:center; border-radius:50%; margin-left:-25px; flex-shrink:0;">2</div>
+            <div>
+              <strong style="font-size:14px;">Obtain Import License (Form Orr. 7)</strong>
+              <p style="font-size:12px; margin-top:4px;">Thai importer holds the food import license. Once product registration is complete, raw material batches can be cleared via Thailand FDA's virtual number system — no per-batch individual approval required.</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start; border-left:2px solid var(--orange); padding-left:16px; margin-left:8px;">
+            <div style="min-width:22px; height:22px; background:var(--green); color:#fff; font:600 10px/22px 'Work Sans',sans-serif; text-align:center; border-radius:50%; margin-left:-25px; flex-shrink:0;">✓</div>
+            <div>
+              <strong style="font-size:14px;">Ongoing Shipments — Per-Batch Documents</strong>
+              <p style="font-size:12px; margin-top:4px;">Each shipment: COA · MSDS · Commercial Invoice · Packing List · Certificate of Origin (Taiwan) · Certificate of Free Sale (TFDA) · Phytosanitary Cert (if applicable)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: logistics & risks -->
+      <div>
+        <div style="margin-bottom:12px;">
+          <div class="eye" style="margin-bottom:8px;">Tariff & Logistics</div>
+          <table style="margin-top:0;">
+            <thead><tr><th>Item</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr class="hi-row"><td><strong>HS Code</strong></td><td>1302.19 (standardized extract / powder)</td></tr>
+              <tr><td>Import Duty</td><td>~5–10% MFN rate (no TW-TH FTA)</td></tr>
+              <tr class="hi-row"><td><strong>VAT</strong></td><td>+7% Thailand VAT</td></tr>
+              <tr><td>Incoterms</td><td>FOB Taichung / CIF Bangkok (to confirm)</td></tr>
+              <tr class="hi-row"><td><strong>Classification</strong></td><td>Novel Food — Authorized (May 2024)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-dk" style="padding:16px 18px;">
+          <strong style="display:block; margin-bottom:8px; font-size:13px;">YouCan's Documentation Covers Everything Thailand FDA Needs</strong>
+          <ul class="tl" style="margin:0;">
+            <li style="padding:4px 0; font-size:12px; color:rgba(239,234,211,.72);">90-day animal toxicology report — core safety evidence for Novel Food filing</li>
+            <li style="padding:4px 0; font-size:12px; color:rgba(239,234,211,.72);">37+ peer-reviewed academic papers — for health claims and product registration</li>
+            <li style="padding:4px 0; font-size:12px; color:rgba(239,234,211,.72);">MOA DNA certificate + 380-compound pesticide panel — meets Thailand Codex standards</li>
+            <li style="padding:4px 0; font-size:12px; color:rgba(239,234,211,.72);">ISO 22000 + HACCP GMP certificates — accepted by Thailand FDA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S10: PARTNERSHIP — low-risk entry -->
+<div class="slide" id="s10">
+  <div class="w">
+    <div class="eye">Working Together</div>
+    <h2>How We Make This<br>Low-Risk for You.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:28px;">
+      <div>
+        <p style="margin-bottom:18px;">We know that switching or adding a new ingredient supplier is a commitment — in time, regulatory work, and formulation investment. Here's how we reduce that risk:</p>
+        <div class="fmt active-fmt" style="border-top-width:2px; padding-top:18px; margin-bottom:16px;">
+          <span class="fmt-tag">Step 1</span>
+          <h4>R&D Sample — First</h4>
+          <p style="font-size:14px;">We ship a characterised sample kit with full COA and technical data sheet. Your formulation team evaluates before any commitment is made.</p>
+        </div>
+        <div class="fmt" style="padding-top:18px; margin-bottom:16px;">
+          <span class="fmt-tag">Step 2</span>
+          <h4>Trial Order</h4>
+          <p style="font-size:14px;">Small initial order with full documentation package. Use it to complete your regulatory filing and prototype formulation.</p>
+        </div>
+        <div class="fmt" style="padding-top:18px;">
+          <span class="fmt-tag">Step 3</span>
+          <h4>Scale Up</h4>
+          <p>Once your product is ready to launch, we align on volume commitments, lead times, and production scheduling to ensure supply continuity.</p>
+        </div>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Details</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hi-row"><td><strong>R&D Samples</strong></td><td>Available — contact us to request</td></tr>
+            <tr><td>Minimum Order Qty</td><td><strong>20 kg</strong></td></tr>
+            <tr class="hi-row"><td><strong>Standard Lead Time</strong></td><td>3–6 weeks from order confirmation</td></tr>
+            <tr><td>Available formats</td><td>Powder, CO₂ extract, dual extract, whole powder</td></tr>
+            <tr class="hi-row"><td><strong>Documentation</strong></td><td>COA, SDS, toxicology, pesticide, DNA cert</td></tr>
+            <tr><td>Technical support</td><td>Formulation consultation included</td></tr>
+            <tr class="hi-row"><td><strong>Export experience</strong></td><td>US, Hong Kong, Macau, Taiwan domestic</td></tr>
+            <tr><td>Payment terms</td><td>T/T — 30% deposit on order confirmation, 70% prior to shipment</td></tr>
+          </tbody>
+        </table>
+        <div class="vbox" style="margin-top:18px;">
+          <p>We've supplied to markets with strict import requirements. Our documentation team prepares country-specific regulatory packs — so your filing process is smooth, not a back-and-forth with your supplier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S11: MOAT / WHY YOUCAN -->
+<div class="slide" id="s11">
+  <div class="w">
+    <div class="eye">What Sets Us Apart</div>
+    <h2>Two Marks on Your Label.<br>Two Reasons Consumers Pay More.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:20px; gap:28px; align-items:start;">
+      <!-- Left: Two differentiator pillars -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <!-- Pillar 1 -->
+        <div class="card-dk" style="padding:22px 24px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:28px; height:28px; background:var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font:700 13px/1 'Unbounded',sans-serif; color:#fff;">1</div>
+            <strong style="font-size:14px; color:var(--cream);">Vintage Certification + CNS 16152</strong>
+          </div>
+          <p style="font-size:13px; color:rgba(239,234,211,.82); line-height:1.65; margin:0 0 10px;">We can license two marks directly to your brand — both printable on your product packaging. The <strong style="color:var(--cream);">Vintage Grade Mark</strong> (4-Year / 8-Year / 10-Year) signals age and maturity to consumers. The <strong style="color:var(--cream);">CNS 16152 Grade 1 mark</strong> signals government-verified quality. Together, they give your product two independent reasons to command a higher price on shelf.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="font:600 10px/1.6 'Work Sans',sans-serif; padding:3px 10px; background:rgba(217,96,48,.2); color:var(--orange); border-radius:2px;">Vintage Mark — licensable</span>
+            <span style="font:600 10px/1.6 'Work Sans',sans-serif; padding:3px 10px; background:rgba(217,96,48,.2); color:var(--orange); border-radius:2px;">CNS 16152 Grade 1 — licensable</span>
+          </div>
+        </div>
+        <!-- Pillar 2 -->
+        <div class="card" style="padding:22px 24px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:28px; height:28px; background:var(--green); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font:700 13px/1 'Unbounded',sans-serif; color:#fff;">2</div>
+            <strong style="font-size:14px; color:var(--black);">Origin Story & Full Traceability</strong>
+          </div>
+          <p style="font-size:13px; color:var(--warm-lt); line-height:1.65; margin:0 0 10px;">Every batch traces back to a specific log, a specific harvest date, a specific cultivation site in Wufeng, Taiwan. We can supply <strong>farm-to-formula story content</strong> for your brand — founder narrative, cultivation photos, short-form video (TikTok) — so your product has a story consumers believe.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="font:600 10px/1.6 'Work Sans',sans-serif; padding:3px 10px; background:rgba(29,76,64,.1); color:var(--green); border-radius:2px; border:1px solid rgba(29,76,64,.2);">Batch-level traceability</span>
+            <span style="font:600 10px/1.6 'Work Sans',sans-serif; padding:3px 10px; background:rgba(29,76,64,.1); color:var(--green); border-radius:2px; border:1px solid rgba(29,76,64,.2);">Media content support</span>
+            <span style="font:600 10px/1.6 'Work Sans',sans-serif; padding:3px 10px; background:rgba(29,76,64,.1); color:var(--green); border-radius:2px; border:1px solid rgba(29,76,64,.2);">TikTok short videos available</span>
+          </div>
+        </div>
+        <!-- Awards strip -->
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:10px 0; border-top:1px solid var(--rule);">
+          <img src="./youcan-yushan-logo.png" style="height:36px; width:auto; object-fit:contain;" title="National Brand Yushan Award 2023">
+          <div style="font:300 11px/1.4 'Work Sans',sans-serif; color:var(--warm-lt);">Yushan Award · Best Product 2023 &nbsp;|&nbsp; Paris Olympics Taiwan Pavilion 2024 &nbsp;|&nbsp; Brain Health Innovation Award 2025</div>
+        </div>
+      </div>
+      <!-- Right: founder photo -->
+      <div style="position:relative;">
+        <img src="./youcan-founder-farm.jpg" style="width:100%; border-radius:6px; display:block; object-fit:cover; max-height:420px;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:14px 18px; background:linear-gradient(transparent, rgba(35,24,21,.85)); border-radius:0 0 6px 6px;">
+          <p style="margin:0; font:600 12px/1.4 'Work Sans',sans-serif; color:#fff;">Mr. Hsu Ming-De — Founder</p>
+          <p style="margin:4px 0 0; font:300 11px/1.4 'Work Sans',sans-serif; color:rgba(255,255,255,.7);">Cultivation site, Wufeng, Taichung · 20 years growing Antrodia on camphor wood logs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12: NEXT STEPS -->
+<div class="slide" id="s12">
+  <div class="w">
+    <div class="eye">The One Thing to Decide Today</div>
+    <h2>Order a Small Trial Batch.<br>Test It. Then Decide.</h2>
+    <div class="bar-l"></div>
+    <div class="col2" style="margin-top:36px; gap:40px; align-items:start;">
+      <div class="card-dk" style="padding:40px 36px;">
+        <p style="font:300 clamp(13px,1.1vw,15px)/1.7 'Work Sans',sans-serif; color:rgba(239,234,211,.8); margin:0 0 28px;">A trial batch lets your R&amp;D team run the real formulation tests — not just read a spec sheet. No large commitment, no risk. If the quality is right, we move forward. If it isn't, you walk away.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid rgba(239,234,211,.15); border-radius:4px; overflow:hidden;">
+          <div style="padding:16px 18px; border-right:1px solid rgba(239,234,211,.15); border-bottom:1px solid rgba(239,234,211,.15);">
+            <div style="font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:4px;">Format</div>
+            <div style="font-size:14px; color:var(--cream);">Extract Powder<br>or Dual Extract</div>
+          </div>
+          <div style="padding:16px 18px; border-bottom:1px solid rgba(239,234,211,.15);">
+            <div style="font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:4px;">Trial Size</div>
+            <div style="font-size:14px; color:var(--cream);">Small batch<br>for lab testing</div>
+          </div>
+          <div style="padding:16px 18px; border-right:1px solid rgba(239,234,211,.15);">
+            <div style="font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:4px;">Included</div>
+            <div style="font-size:14px; color:var(--cream);">Full COA<br>+ Spec Sheet</div>
+          </div>
+          <div style="padding:16px 18px;">
+            <div style="font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:4px;">Commitment</div>
+            <div style="font-size:14px; color:var(--orange); font-weight:500;">Zero</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:8px;">
+        <div class="eye" style="margin-bottom:18px;">What we'll ship with it</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div style="width:6px; height:6px; border-radius:50%; background:var(--orange); margin-top:6px; flex-shrink:0;"></div>
+            <p style="margin:0; font-size:clamp(13px,1.2vw,15px); line-height:1.6;">Certificate of Analysis (COA) — triterpenoids, polysaccharides, 8 marker antcins</p>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div style="width:6px; height:6px; border-radius:50%; background:var(--orange); margin-top:6px; flex-shrink:0;"></div>
+            <p style="margin:0; font-size:clamp(13px,1.2vw,15px); line-height:1.6;">Heavy metals, pesticide residue (380 compounds), adulterant screen results</p>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div style="width:6px; height:6px; border-radius:50%; background:var(--orange); margin-top:6px; flex-shrink:0;"></div>
+            <p style="margin:0; font-size:clamp(13px,1.2vw,15px); line-height:1.6;">90-day animal safety report — ready for your regulatory team</p>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div style="width:6px; height:6px; border-radius:50%; background:var(--orange); margin-top:6px; flex-shrink:0;"></div>
+            <p style="margin:0; font-size:clamp(13px,1.2vw,15px); line-height:1.6;">Curated academic literature — 5 key studies for Thailand market health claims</p>
+          </div>
+        </div>
+        <div style="margin-top:28px; padding:18px 22px; background:var(--orange); border-radius:4px;">
+          <p style="margin:0; font-size:14px; color:white; line-height:1.5;"><strong>Tell us your target format today</strong> — we'll confirm availability and prepare your trial shipment within the week.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S13: CLOSING -->
+<div class="slide" id="s13" style="background:var(--green);">
+  <div class="w" style="text-align:center;">
+    <div class="eye">YouCan Biotech · wecare@twyoucan.com</div>
+    <h2 style="color:var(--cream);">The Window to Own<br>Antrodia in Your Market<br>Is Open Now.</h2>
+    <div class="bar"></div>
+    <p style="color:rgba(239,234,211,.6); max-width:540px; margin:0 auto;">We're here. Let's make time today to talk about samples, specifications, and what building this category together could look like for your business.</p>
+    <div class="badge-row">
+      <div class="badge">R&D Samples Available</div>
+      <div class="badge">Full Documentation Package</div>
+      <div class="badge">Technical Consultation Included</div>
+    </div>
+    <div style="margin-top:44px; display:flex; gap:40px; justify-content:center; align-items:center; flex-wrap:wrap;">
+      <div>
+        <div style="font:500 8px/1 'Work Sans',sans-serif; letter-spacing:4px; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:6px;">Email</div>
+        <div style="font:300 15px/1 'Work Sans',sans-serif; letter-spacing:1px; color:rgba(239,234,211,.8);">wecare@twyoucan.com</div>
+      </div>
+      <div style="width:1px; height:30px; background:rgba(239,234,211,.15);"></div>
+      <div>
+        <div style="font:500 8px/1 'Work Sans',sans-serif; letter-spacing:4px; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:6px;">Web</div>
+        <div style="font:300 15px/1 'Work Sans',sans-serif; letter-spacing:1px; color:rgba(239,234,211,.8);">www.twyoucan.com</div>
+      </div>
+      <div style="width:1px; height:30px; background:rgba(239,234,211,.15);"></div>
+      <div>
+        <div style="font:500 8px/1 'Work Sans',sans-serif; letter-spacing:4px; text-transform:uppercase; color:rgba(239,234,211,.35); margin-bottom:6px;">Phone</div>
+        <div style="font:300 15px/1 'Work Sans',sans-serif; letter-spacing:1px; color:rgba(239,234,211,.8);">+886-4-2332-3518</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end deck -->
+
+<div class="snum" id="snum">01 / 11</div>
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">← Prev</button>
+  <div id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">Next →</button>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+  function buildDots() {
+    const c = document.getElementById('dots');
+    slides.forEach((_,i) => {
+      const d = document.createElement('div');
+      d.className = 'dot'+(i===0?' on':'');
+      d.onclick = () => go(i);
+      c.appendChild(d);
+    });
+  }
+  function go(n) {
+    slides[cur].classList.remove('active');
+    document.querySelectorAll('.dot')[cur].classList.remove('on');
+    cur = Math.max(0,Math.min(n,slides.length-1));
+    slides[cur].classList.add('active');
+    document.querySelectorAll('.dot')[cur].classList.add('on');
+    document.getElementById('snum').textContent = String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  }
+  document.addEventListener('keydown',e => {
+    if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+    if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+  });
+  document.getElementById('deck').addEventListener('click',e=>{ if(!e.target.closest('.nav')) go(cur+1); });
+  let tx=0;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>48) go(cur+(dx<0?1:-1));});
+  buildDots();
+  go(0);
+</script>
+</body>
+</html>
