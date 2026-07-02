@@ -78,6 +78,7 @@
   .fmt .use { font:500 9px/1 'Work Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; color:var(--warm-lt); margin-top:14px; display:block; }
   /* Table */
   table { width:100%; border-collapse:collapse; margin-top:20px; }
+  .tbl-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   th { font:500 9px/1 'Work Sans',sans-serif; letter-spacing:3px; text-transform:uppercase; color:var(--warm-lt); padding:9px 12px; border-bottom:1px solid var(--rule); text-align:left; }
   td { font:300 clamp(13px,1.3vw,15px)/1.6 'Work Sans',sans-serif; color:var(--warm-mid); padding:9px 12px; border-bottom:1px solid rgba(217,96,48,0.08); vertical-align:top; }
   /* Certification logos */
@@ -107,6 +108,8 @@
   }
   @media (max-width:640px) {
     .slide { padding:48px 18px 80px; overflow-y:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; }
+    .col2 > div, .col3 > div, .col4 > div { min-width:0; }
+    .tbl-wide table { min-width:560px; }
     h1 { font-size:clamp(20px,6.5vw,34px); }
     h2 { font-size:clamp(16px,5vw,26px); }
     .col2 { grid-template-columns:1fr; gap:18px; }
@@ -276,6 +279,7 @@
       </div>
       <div>
         <div class="eye" style="margin-bottom:12px;">What Your Supplier Doesn't Always Tell You</div>
+        <div class="tbl-scroll tbl-wide">
         <table>
           <thead>
             <tr><th>Parameter</th><th style="color:var(--orange);">Wood-Grown Fruiting Body</th><th>Mycelium</th><th>Grain-Grown</th></tr>
@@ -289,6 +293,7 @@
             <tr><td>Vintage grade mark</td><td style="color:var(--orange); font-weight:500;">Licensable</td><td style="color:var(--warm-lt);">Not applicable</td><td style="color:var(--warm-lt);">Not applicable</td></tr>
           </tbody>
         </table>
+        </div>
         <div class="vbox" style="margin-top:14px;">
           <p style="font-size:12px; line-height:1.65;">Many "Antrodia cinnamomea" products on the market are mycelium-based or grain-grown. They can legally carry the species name — but they lack the marker antcins that define the ingredient's therapeutic value and CNS 16152 eligibility.</p>
         </div>
@@ -388,6 +393,7 @@
         </div>
       </div>
       <div>
+        <div class="tbl-scroll">
         <table>
           <thead>
             <tr><th>Parameter</th><th>Specification</th></tr>
@@ -402,6 +408,7 @@
             <tr class="hi-row"><td><strong>Shelf life</strong></td><td>3 years (sealed, stored at 25°C)</td></tr>
           </tbody>
         </table>
+        </div>
         <div class="cert-row" style="margin-top:16px;">
           <div class="cert">CNS16152 Grade 1</div>
           <div class="cert">ISO 22000</div>
@@ -564,6 +571,7 @@
       <div>
         <div style="margin-bottom:12px;">
           <div class="eye" style="margin-bottom:8px;">Tariff & Logistics</div>
+          <div class="tbl-scroll">
           <table style="margin-top:0;">
             <thead><tr><th>Item</th><th>Details</th></tr></thead>
             <tbody>
@@ -574,6 +582,7 @@
               <tr class="hi-row"><td><strong>Classification</strong></td><td>Novel Food — Authorized (May 2024)</td></tr>
             </tbody>
           </table>
+          </div>
         </div>
         <div class="card-dk" style="padding:16px 18px;">
           <strong style="display:block; margin-bottom:8px; font-size:13px;">YouCan's Documentation Covers Everything Thailand FDA Needs</strong>
@@ -615,6 +624,7 @@
         </div>
       </div>
       <div>
+        <div class="tbl-scroll">
         <table>
           <thead>
             <tr><th>Item</th><th>Details</th></tr>
@@ -630,6 +640,7 @@
             <tr><td>Payment terms</td><td>T/T — 30% deposit on order confirmation, 70% prior to shipment</td></tr>
           </tbody>
         </table>
+        </div>
         <div class="vbox" style="margin-top:18px;">
           <p>We've supplied to markets with strict import requirements. Our documentation team prepares country-specific regulatory packs — so your filing process is smooth, not a back-and-forth with your supplier.</p>
         </div>
